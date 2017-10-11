@@ -1,1 +1,2 @@
 # CarthageDegreeTracker
+This application will use Ruby, SQL, and Sinatra in order to calculate how for a studnet is in their major and how close they are to finishing the General Requirements at Carthage College. Sinatra will be used as the controller between web and server and aid in the front end development, SQL will create the databases needed to store the majors and the database needed to store the cources associted with the majors, and the applicantion will be written in Ruby.
