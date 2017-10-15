@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Carthage College Graduation Tracker
+		</title>
+
+        <h1>
+            Add a Class Taken:
+        </h1>
+
+		<!-- jquery -->
+		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+		
+		<script type="text/javascript">
+			//when the document is ready to be manipulated
+			$(document).ready(function(){
+
+				//and add a click handler to the button
+				$("#add_visitor_button").click(function() {
+
+                    var visitor_name = $("#visitor_name").val().trim();
+                    var visitor_email = $("#visitor_email").val().trim();
+                    
+					//post some data to the server
+					//$.post takes:
+					//	url- the url of the server to send data to
+					//	data- the data to send in the post 
+					//	function- called when the response from the post comes in
+					$.post("/visitor", //url
+						{name: visitor_name, email: visitor_email}, //data (js object)
+						function(data) { //function to call on return
+                        
+							//empty out the visitors div
+							$("#visitors").empty();
+							
+                            //clear out the name and email textboxes
+							$("#visitor_name").val("");
+							$("#visitor_email").val("");
+
+							//for each piece of data- val holds the json with the name and email
+							$.each(data, function( key, val ) {
+								//append the name
+								$("#visitors").append(val.name);
+								//and email
+								$("#visitors").append(" <a href='mailto:" + val.email + "'>" + val.email + "</a>");
+								//newline
+								$("#visitors").append("</br>");
+							});
+	  					}
+	  				);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<p>
+			You are a welcome visitor to this page. 
+		</p>		
+		<p>
+			Here are all the previous visitors: 
+		</p>
+
+		<div id="visitors">
+            <!-- notice the difference between how each of the erb tags starts
+                 If you use an equals sign that means to write to the page text
+                 If you do not use an equals sign we are writing ruby code but 
+                 not writing to the page -->
+			<% @all_visitors.each do |visitor| %>
+				<%= visitor.name %> <a href='mailto:<%= visitor.email %>'><%= visitor.email %></a>
+				<br/>
+			<% end %>
+		</div>
+
+		<p>
+			Please sign the guestbook so others know that you have been here.
+			<br/>
+			Name: <input id='visitor_name' type='text' />
+			<br/>
+			Email: <input id='visitor_email' type='text' />
+			<br/>
+			<input id='add_visitor_button' type='submit' text='Sign the guestbook' /> 
+		</p>
+	</body>
+</html>
