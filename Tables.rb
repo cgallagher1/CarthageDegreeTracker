@@ -5,7 +5,7 @@ DB = Sequel.connect('sqlite://Models.db')
 
 def create_tables
     
-	#creates a table of majors (if it doesn't already exist)
+	#create a table of majors (if it doesn't already exist)
 	DB.create_table? :majors do
 	  primary_key :id 
 	  String :name 
@@ -16,7 +16,7 @@ def create_tables
 	DB.create_table? :courses do
 	  primary_key :id 
 	  String :courseTitle
-	  Float :courseNumber 
+	  String :courseNumber 
 	  foreign_key :majors_id, :majors
 	end
     
@@ -27,67 +27,70 @@ def create_tables
 		#courses and majors. This will create majors_courses
 		DB.create_join_table(:majors_id => :majors, :course_id => :courses)
 	end
-    
-    #go look at the model definitions at the end of the file
 end
 
 def createMajors
-#one way to create a model object
-#mark = Student.new
-#mark.name = "Mark"
-#mark.gpa = 3.1
-#mark.save
-#puts mark.inspect
-
-#create a Major and store it in the database
-Accounting = Majors.create(:name => "Accounting")
-ArtEducation = Majors.create(:name => "Art Education (K-12)")
-ArtHistory = Majors.create(:name => "Art History")
-Art = Majors.create(:name => "Art (Studio)")
-AsianStudies = Majors.create(:name => "Asian Studies")
-Art = Majors.create(:name => "Art (Studio)")
-Art = Majors.create(:name => "Art (Studio)")
-Art = Majors.create(:name => "Art (Studio)")
-Art = Majors.create(:name => "Art (Studio)")
-Art = Majors.create(:name => "Art (Studio)")
-Art = Majors.create(:name => "Art (Studio)")
-
-
-#create a couple of computers
-marks_computer = Computer.create(:os => "W8.1", :cpu_speed => 2.7)
-marks_phone = Computer.create(:os => "Android", :cpu_speed => 2.0)
-#associate the student and the computers. Making the association in the
-#model classed above created a set of methods to link objects together
-mark.add_computer(marks_computer)
-mark.add_computer(marks_phone)
-
-#create another student and computer
-laura = Student.create(:name => "Laura", :gpa => 3.8)
-lauras_computer = Computer.create(:os => "OSX", :cpu_speed => 2.3)
-#link the student and the computer
-laura.add_computer(lauras_computer)
-
-#create some students without a computer
-buddy = Student.create(:name => "Buddy", :gpa => 3.9)
-patrick = Student.create(:name => "Patrick", :gpa => 3.91)
-
-#create some courses
-cs1110 = Course.create(:course_name => 'CSC1110', :prof_name => 'Mahoney')
-cs1120 = Course.create(:course_name => 'CSC1120', :prof_name => 'Mahoney')
-cs3210 = Course.create(:course_name => 'CSC3210', :prof_name => 'Mahoney')
-
-#use the association methods to link students to courses
-cs1110.add_student(mark)
-cs1110.add_student(laura)
-cs1110.add_student(buddy)
-cs1110.add_student(patrick)
-
-cs1120.add_student(mark)
-cs1120.add_student(patrick)
-
-cs3210.add_student(laura)
-cs3210.add_student(buddy)
-cs3210.add_student(patrick)
-	
-	puts
+	majors = DB[:majors]
+	#insert a Major and stores it in the database
+	Accounting = majors.insert(:name => "Accounting")
+	ArtEducation = majors.insert(:name => "Art Education (K-12)")
+	ArtHistory = majors.insert(:name => "Art History")
+	Art = majors.insert(:name => "Art (Studio)")
+	AsianStudies = majors.insert(:name => "Asian Studies")
+	AthleticTraining = majors.insert(:name => "Athletic Training")
+	Biology = majors.insert(:name => "Biology")
+	Chemistry = majors.insert(:name => "Chemistry")
+	Chinese = majors.insert(:name => "Chinese")
+	ClassicalArchaeology = majors.insert(:name => "Classical Archaeology")
+	ClassicalFoundations = majors.insert(:name => "Classical Foundations")
+	Communication = majors.insert(:name => "Communication")
+	ComputerScience = majors.insert(:name => "Computer Science")
+	CriminalJustice = majors.insert(:name => "Criminal Justice")
+	Economics = majors.insert(:name => "Economics")
+	EducationSpecial = majors.insert(:name => "Education, Cross Categorical Special Education (K-12)")
+	EducationElementary = majors.insert(:name => "Education, Elementary/Middle (1-8)")
+	English = majors.insert(:name => "English")
+	CreativeWriting = majors.insert(:name => "English with emphasis in Creative Writing")
+	EnvironmentalScience = majors.insert(:name => "Environmental Science")
+	Finance = majors.insert(:name => "Finance")
+	French = majors.insert(:name => "French")
+	GIS = majors.insert(:name => "Geographic Information Science")
+	Geoscience = majors.insert(:name => "Geoscience")
+	German = majors.insert(:name => "German")
+	GraphicDesign = majors.insert(:name => "Graphic Design")
+	GreatIdeas = majors.insert(:name => "Great Ideas")
+	History = majors.insert(:name => "History")
+	IPE = majors.insert(:name => "International Political Economy")
+	Japanese = majors.insert(:name => "Japanese")
+	Management = majors.insert(:name => "Management")
+	Marketing = majors.insert(:name => "Marketing")
+	Mathematics = majors.insert(:name => "Mathematics")
+	Music = majors.insert(:name => "Music")
+	MusicEducation = majors.insert(:name => "Music Education")
+	Neuroscience = majors.insert(:name => "Neuroscience")
+	Nursing = majors.insert(:name => "Nursing")
+	Philosophy = majors.insert(:name => "Philosophy")
+	PE = majors.insert(:name => "Physical Education, Sport, and Fitness Instruction")
+	Physics = majors.insert(:name => "Physics")
+	PoliticalScience = majors.insert(:name => "Political Science")
+	Psychology = majors.insert(:name => "Psychology")
+	PublicRelations = majors.insert(:name => "Public Relations")
+	Religion = majors.insert(:name => "Religion")
+	SocialWork = majors.insert(:name => "Social Work")
+	Sociology = majors.insert(:name => "Sociology")
+	Spanish = majors.insert(:name => "Spanish")
+	Theatre = majors.insert(:name => "Theatre")
+	TheatrePerformance = majors.insert(:name => "Theatre Performance")
 end
+
+def createCourses
+	#List of possible courses
+	courses = DB[:courses]
+	ACC2010 = courses.insert(:courseTitle => "Financial Accounting", :courseNumber => "ACC 2010")
+
+end
+
+
+
+
+
