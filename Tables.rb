@@ -44,6 +44,13 @@ Accounting = Majors.create(:name => "Accounting")
 ArtEducation = Majors.create(:name => "Art Education (K-12)")
 ArtHistory = Majors.create(:name => "Art History")
 Art = Majors.create(:name => "Art (Studio)")
+AsianStudies = Majors.create(:name => "Asian Studies")
+Art = Majors.create(:name => "Art (Studio)")
+Art = Majors.create(:name => "Art (Studio)")
+Art = Majors.create(:name => "Art (Studio)")
+Art = Majors.create(:name => "Art (Studio)")
+Art = Majors.create(:name => "Art (Studio)")
+Art = Majors.create(:name => "Art (Studio)")
 
 
 #create a couple of computers
