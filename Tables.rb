@@ -1,4 +1,6 @@
 require 'sequel'
+require_relative 'Courses.rb'
+require_relative 'Majors.rb'
 
 #connect to the sqlite database
 DB = Sequel.connect('sqlite://Tables.db') 
@@ -143,7 +145,7 @@ def createMajors
 	computerScience.add_courses(csc3730)
 	computerScience.add_courses(csc3750)
 	computerScience.add_courses(csc400T)
-	computerScience.add_courses(csc4350)
+	computerScience.add_courses(csc4350)                                                                                 
 	computerScience.add_courses(csc4500)
 	computerScience.add_courses(csc4650)
 	computerScience.add_courses(csc4810)
@@ -152,6 +154,19 @@ def createMajors
 	
 end
 
+def print_Major_Courses(name)
+    
+    puts "-- Print Major by name and show their courses --"
+    
+    #find all the students with the passed in name
+	Majors.where(:name => name).each do |class|
+		#print the student
+		puts "#{class.name}'s course is #{}"
+	end
+    
+    puts
+end
 
+createMajors
 
 
