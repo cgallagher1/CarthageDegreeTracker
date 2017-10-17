@@ -162,5 +162,3 @@ require_relative 'Courses.rb'
 require_relative 'Majors.rb'
 
 createMajor
-
-

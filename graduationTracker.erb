@@ -48,7 +48,7 @@
 <p>Please add the classes you've taken</p>
 
 <div class="Departments">
-<button onclick="myFunction()" class="dropbtn">Departments</button>
+<button onclick="departmentShowFunction()" class="dropbtn">Departments</button>
   <div id="departmentDropdown" class="dropdown-content">
     <a href="#home">Home</a>
     <a href="#about">About</a>
@@ -59,7 +59,8 @@
 <script>
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
-function myFunction() {
+function departmentShowFunction() 
+{
     document.getElementById("departmentDropdown").classList.toggle("show");
 }
 
