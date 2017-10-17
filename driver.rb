@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'sequel'
-require 'sinatra/json'
+require 'sinatra'
 
 #enable sessions in the server (this is not on by default)
 enable :sessions
@@ -132,7 +132,7 @@ configure do
         #Math Classes
             
         #MTH 1240 Discrete Structures (4 credits)
-        mth1240 = Course.create(:courseTitle => "Discrete Structures", :courseNumber => "MTH 1240")
+        mth1240 = Course.create(:courseTitle => "Discrete Structures", :courseNumber => "mth 1240")
 
         #Creation of Major with Classes
 
@@ -173,18 +173,6 @@ end
 
 #handles the inital page loads
 get '/' do
-	#see if this is a returning visitor
-	visitor = get_previous_visitor_from_session
-
-	#if there is a visitor 
-	if not visitor.nil?
-		#record this visitors visit
-		visitor.record_visit
-	end
-
-	#get all the visitors in reverse order of their sign in time
-	@all_visitors = Visitor.reverse_order(:sign_in_time)
-	
 	#render the template in the views folder guestbook.erb
-	erb :guestbook
+	erb :graduationTracker
 end

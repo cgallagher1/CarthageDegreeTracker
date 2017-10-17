@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {background-color: LIGHTCORAL;}
+h2   {color: black;}
+p    {color: white;}
+</style>
+</head>
+<body>
+
+<h2>Carthage College Graduation Tracker</h2>
+<p>First add the classes you've taken</p>
+
+<p>
+</p>
+
+<p> Please Select the Department: </p>
+<select>
+  <option value="computerScience">Computer Science</option>
+  <option value="math">Math</option>
+</select>
+
+<button onclick="showCourses()">Continue</button>
+
+<p id="courses"></p>
+
+<script>
+  function showCourses()
+  {
+      document.getElementById("courses").innerHTML = 
+      <select>
+      <option value="computerScience">Computer Science</option>
+      <option value="math">Math</option>
+      </select>;
+  }
+</script>
+
+</body>
+</html>
