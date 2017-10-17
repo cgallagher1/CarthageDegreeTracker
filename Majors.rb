@@ -1,5 +1,4 @@
 class Major < Sequel::Model
-    #the Course class now has members for the course_name and prof_name (found in the Course table)
 
     #create some associations 
     #for the many to many relationship between courses and majors. Many to

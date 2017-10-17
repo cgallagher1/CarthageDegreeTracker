@@ -25,7 +25,7 @@ def create_tables
 	if not DB.table_exists?(:courses_majors)
 		#create a join table for the many to many relationship between
 		#courses and Major. This will create Major_courses
-		DB.create_join_table(:courses_id => :courses , :major_id => :majors)
+		DB.create_join_table(:major_id => :majors,:course_id => :courses)
 	end
 end
 
