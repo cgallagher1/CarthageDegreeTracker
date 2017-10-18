@@ -4,8 +4,7 @@ require 'sinatra'
 
 #enable sessions in the server (this is not on by default)
 enable :sessions
-
-
+all_majors = Array.new
 #connect to the sqlite database
 configure do
     #connect to the sqlite database
@@ -161,18 +160,21 @@ configure do
         mathematics.add_course(mth1240)
         
     end
-
-
-    create_tables
-
-    require_relative 'Courses.rb'
-    require_relative 'Majors.rb'
-
-    createMajor
+ 
 end
+
 
 #handles the inital page loads
 get '/' do
+    create_tables
+    require_relative 'Courses.rb'
+    require_relative 'Majors.rb'
+    createMajor
+
+    @all_majors = Major.order(:name)
 	#render the template in the views folder guestbook.erb
 	erb :graduationTracker
 end
+
+
+

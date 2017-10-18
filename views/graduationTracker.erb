@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+function returnMajor() 
+{
+    var x = document.getElementById("mySelect").value;
+    document.getElementById("demo").innerHTML = x;
+}
+</script>
 <style>
 body {background-color: LIGHTCORAL;}
 h2   {color: black;}
@@ -16,25 +23,21 @@ p    {color: white;}
 </p>
 
 <p> Please Select the Department: </p>
-<select>
-  <option value="computerScience">Computer Science</option>
-  <option value="math">Math</option>
-</select>
 
-<button onclick="showCourses()">Continue</button>
+<div id="majorList">
+  <select id="mySelect">
+	  <% @all_majors.each do |names| %>	
+      <option value= <%= names.name %>><%= names.name %> </option>
+    <% end %>
+  </select>			
+</div>
 
-<p id="courses"></p>
+<p>
+</p>
 
-<script>
-  function showCourses()
-  {
-      document.getElementById("courses").innerHTML = 
-      <select>
-      <option value="computerScience">Computer Science</option>
-      <option value="math">Math</option>
-      </select>;
-  }
-</script>
+<button type="button" onclick="returnMajor()">Continue</button>
+
+<p id="demo"></p>
 
 </body>
 </html>
