@@ -39,54 +39,52 @@ configure do
 
         #creates a Major object and adds them to the list of majors
         accounting = Major.create(:name => "Accounting")
-        artEducation = Major.create(:name => "Art Education (K-12)")
-        artHistory = Major.create(:name => "Art History")
-        art = Major.create(:name => "Art (Studio)")
-        asianStudies = Major.create(:name => "Asian Studies")
-        athleticTraining = Major.create(:name => "Athletic Training")
+        artEducation = Major.create(:name => "ArtEducation")
+        artHistory = Major.create(:name => "ArtHistory")
+        art = Major.create(:name => "ArtStudio")
+        asianStudies = Major.create(:name => "AsianStudies")
+        athleticTraining = Major.create(:name => "AthleticTraining")
         biology = Major.create(:name => "Biology")
         chemistry = Major.create(:name => "Chemistry")
         chinese = Major.create(:name => "Chinese")
-        classicalArchaeology = Major.create(:name => "Classical Archaeology")
-        classicalFoundations = Major.create(:name => "Classical Foundations")
+        classicalArchaeology = Major.create(:name => "ClassicalArchaeology")
+        classicalFoundations = Major.create(:name => "ClassicalFoundations")
         communication = Major.create(:name => "Communication")
-        computerScience = Major.create(:name => "Computer Science")
-        criminalJustice = Major.create(:name => "Criminal Justice")
+        computerScience = Major.create(:name => "ComputerScience")
+        criminalJustice = Major.create(:name => "CriminalJustice")
         economics = Major.create(:name => "Economics")
-        educationSpecial = Major.create(:name => "Education, Cross Categorical Special Education (K-12)")
-        educationElementary = Major.create(:name => "Education, Elementary/Middle (1-8)")
+        educationSpecial = Major.create(:name => "Education")
         english = Major.create(:name => "English")
-        creativeWriting = Major.create(:name => "English with emphasis in Creative Writing")
-        environmentalScience = Major.create(:name => "Environmental Science")
+        environmentalScience = Major.create(:name => "EnvironmentalScience")
         finance = Major.create(:name => "Finance")
         french = Major.create(:name => "French")
-        gIS = Major.create(:name => "Geographic Information Science")
+        gIS = Major.create(:name => "GeographicInformationScience")
         geoscience = Major.create(:name => "Geoscience")
         german = Major.create(:name => "German")
-        graphicDesign = Major.create(:name => "Graphic Design")
-        greatIdeas = Major.create(:name => "Great Ideas")
+        graphicDesign = Major.create(:name => "GraphicDesign")
+        greatIdeas = Major.create(:name => "GreatIdeas")
         history = Major.create(:name => "History")
-        iPE = Major.create(:name => "International Political Economy")
+        iPE = Major.create(:name => "InternationalPoliticalEconomy")
         japanese = Major.create(:name => "Japanese")
         management = Major.create(:name => "Management")
         marketing = Major.create(:name => "Marketing")
         mathematics = Major.create(:name => "Mathematics")
         music = Major.create(:name => "Music")
-        musicEducation = Major.create(:name => "Music Education")
+        musicEducation = Major.create(:name => "MusicEducation")
         neuroscience = Major.create(:name => "Neuroscience")
         nursing = Major.create(:name => "Nursing")
         philosophy = Major.create(:name => "Philosophy")
-        pE = Major.create(:name => "Physical Education, Sport, and Fitness Instruction")
+        pE = Major.create(:name => "Physical Education")
         physics = Major.create(:name => "Physics")
-        politicalScience = Major.create(:name => "Political Science")
+        politicalScience = Major.create(:name => "PoliticalScience")
         psychology = Major.create(:name => "Psychology")
-        publicRelations = Major.create(:name => "Public Relations")
+        publicRelations = Major.create(:name => "PublicRelations")
         religion = Major.create(:name => "Religion")
-        socialWork = Major.create(:name => "Social Work")
+        socialWork = Major.create(:name => "SocialWork")
         sociology = Major.create(:name => "Sociology")
         spanish = Major.create(:name => "Spanish")
         theatre = Major.create(:name => "Theatre")
-        theatrePerformance = Major.create(:name => "Theatre Performance")
+        theatrePerformance = Major.create(:name => "TheatrePerformance")
 
         #Computer Science Classes
         #csc 1110 Principles of Computer Science I (4 credits)
@@ -174,6 +172,13 @@ get '/' do
     @all_majors = Major.order(:name)
 	#render the template in the views folder guestbook.erb
 	erb :graduationTracker
+end
+
+post '/major' do 
+	#params holds the data from the post request
+	#see if there is a visitor with the same email as in the form
+	majorSelected = params[:nameMajor]
+    return json majorSelected
 end
 
 

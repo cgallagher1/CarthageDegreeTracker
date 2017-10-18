@@ -4,8 +4,17 @@
 <script>
 function returnMajor() 
 {
-    var x = document.getElementById("mySelect").value;
-    document.getElementById("demo").innerHTML = x;
+    var majorSelected = document.getElementById("mySelect").value;
+    $.post("/major", //url
+    {nameMajor: majorSelected.val()}, //data 
+    function(data) //function to call on return
+    { 
+      $.each(data, function(val) 
+      {
+				$("#demo").append(<p>val.nameMajor</p>);
+			});
+    }
+    );
 }
 </script>
 <style>
@@ -37,7 +46,9 @@ p    {color: white;}
 
 <button type="button" onclick="returnMajor()">Continue</button>
 
-<p id="demo"></p>
+<div id="demo">
+  <p>hi</p>
+</div>
 
 </body>
 </html>
