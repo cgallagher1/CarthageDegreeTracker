@@ -4,14 +4,16 @@
 <script>
 function returnMajor() 
 {
-    var majorSelected = document.getElementById("mySelect").value;
-    $.post("/major", //url
-    {nameMajor: majorSelected.val()}, //data 
+    var majorSelected = document.getElementById("myMajor").value;
+    //document.getElementById("demo").innerHTML = majorSelected;
+    $.post("/majorReturn", //url
+    {nameMajor: majorSelected}, //data 
     function(data) //function to call on return
     { 
-      $.each(data, function(val) 
+      $.each(data, function( key, val ) 
       {
-				$("#demo").append(<p>val.nameMajor</p>);
+				//append the name
+				$("#courseList").append("<option value=" + val.courseNumber + ">" + val.courseNumber + val.courseTitle"</option>)";
 			});
     }
     );
@@ -34,7 +36,7 @@ p    {color: white;}
 <p> Please Select the Department: </p>
 
 <div id="majorList">
-  <select id="mySelect">
+  <select id="myMajor">
 	  <% @all_majors.each do |names| %>	
       <option value= <%= names.name %>><%= names.name %> </option>
     <% end %>
@@ -46,8 +48,12 @@ p    {color: white;}
 
 <button type="button" onclick="returnMajor()">Continue</button>
 
-<div id="demo">
-  <p>hi</p>
+<div id="coursesInto">
+ <p> Please Select the Course You've Taken </p>
+ <select id="mycourse">
+    <div id = "courseList">
+    </div>
+  </select>
 </div>
 
 </body>

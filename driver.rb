@@ -174,11 +174,18 @@ get '/' do
 	erb :graduationTracker
 end
 
-post '/major' do 
+post '/majorReturn' do 
 	#params holds the data from the post request
-	#see if there is a visitor with the same email as in the form
-	majorSelected = params[:nameMajor]
-    return json majorSelected
+    majorSelected = Major.where(:name => params[:nameMajor])
+    
+    puts majorSelected
+
+    all_courses = majorSelected.courses.map do |chosenMajor|
+        course_info = {:courseTitle => all_courses.courseTitle, :courseNumber => all_courses.courseNumber}
+    end
+
+    return json all_courses
+
 end
 
 
