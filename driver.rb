@@ -26,7 +26,12 @@ configure do
         String :courseTitle
         String :courseNumber 
         end
-        
+
+        DB.create_table? :users do
+        primary_key :id 
+        String :userName
+        end
+
         #join tables are always named with the names of the two joining tables
         #in alphabetic order
         if not DB.table_exists?(:courses_majors)
@@ -34,6 +39,7 @@ configure do
             #Courses and Majors. This will create courses_majors
             DB.create_join_table(:course_id => :courses,:major_id => :majors)
         end
+
     end
 
     def createMajor
@@ -162,15 +168,16 @@ configure do
  
 end
 
+create_tables
+require_relative 'Courses.rb'
+require_relative 'Majors.rb'
+require_relative 'User.rb'
+createMajor
 
 #handles the inital page loads
 get '/' do
-    create_tables
-    require_relative 'Courses.rb'
-    require_relative 'Majors.rb'
-    createMajor
-
     @all_majors = Major.order(:name)
+    
 	#render the template in the views folder guestbook.erb
 	erb :graduationTracker
 end
@@ -189,6 +196,10 @@ post '/major' do
 
     return JSON all_courses
 
+end
+
+post '/add' do
+    
 end
 
 

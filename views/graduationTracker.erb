@@ -21,6 +21,16 @@ function returnMajor()
     }
     );
 }
+
+function addClass()
+{
+
+}
+
+function createUser()
+{
+  var userName = document.getElementById(nameText).value;
+}
 </script>
 <style>
 body {background-color: LIGHTCORAL;}
@@ -31,6 +41,17 @@ p    {color: white;}
 <body>
 
 <h2>Carthage College Graduation Tracker</h2>
+
+<p>
+</p>
+
+<p>Please enter your name:</p>
+<input type="text" id="nameText">
+<button type="button" onclick="createUser()">Okay</button>
+
+<p>
+</p>
+
 <p>First add the classes you've taken</p>
 
 <p>
@@ -56,6 +77,11 @@ p    {color: white;}
 <div id="coursesInto">
 
 </div>
+
+<p>
+</p>
+
+<button type="button" onclick="addClass()">Add Class</button>
 
 </body>
 </html>
