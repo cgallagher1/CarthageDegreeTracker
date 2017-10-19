@@ -177,11 +177,14 @@ end
 
 post '/major' do 
 	#params holds the data from the post request
-    #majorSelected = Major.where(:name => params[:name])
-    majorSelected = Major[name: params[:name]]
+    majorSelected = Major.where(:name => params[:name])
+    
+    all_courses = Array.new
 
-    all_courses = majorSelected.course.order.map do |chosenMajor|
-        course_info = {:courseTitle => chosenMajor.course.courseTitle, :courseNumber => chosenMajor.course.courseNumber}
+    majorSelected.each do |major|
+        all_courses = major.courses.each.map do |currentCourse|
+            course_info = {:courseTitle => currentCourse.courseTitle, :courseNumber => currentCourse.courseNumber}
+        end
     end
 
     return JSON all_courses

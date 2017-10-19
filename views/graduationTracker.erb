@@ -11,11 +11,13 @@ function returnMajor()
     {name: majorSelected}, //data 
     function(data) //function to call on return
     { 
-      $.each(data, function( key, val ) 
+      var json = JSON.parse(data);
+      $("#coursesInto").append("<select id='myCourse'>")
+      for(var i = 0; i < data.length;i++)
       {
-				//append the name
-				$("#courseList").append("<option value=" + val.courseNumber + ">" + val.courseNumber + "</option>)");
-			});
+        $("#myCourse").append("<option value= " + json[i].courseNumber + ">" + json[i].courseNumber + "</option>");
+      }
+      $("#coursesInto").append("</select>")
     }
     );
 }
@@ -49,12 +51,10 @@ p    {color: white;}
 
 <button type="button" onclick="returnMajor()">Continue</button>
 
-<div id="coursesInto">
  <p> Please Select the Course You've Taken </p>
- <select id="mycourse">
-    <div id = "courseList">
-    </div>
-  </select>
+
+<div id="coursesInto">
+
 </div>
 
 </body>
