@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
 function returnMajor() 
 {
     var majorSelected = document.getElementById("myMajor").value;
     //document.getElementById("demo").innerHTML = majorSelected;
-    $.post("/majorReturn", //url
-    {nameMajor: majorSelected}, //data 
+    $.post("/major", //url
+    {name: majorSelected}, //data 
     function(data) //function to call on return
     { 
       $.each(data, function( key, val ) 
       {
 				//append the name
-				$("#courseList").append("<option value=" + val.courseNumber + ">" + val.courseNumber + val.courseTitle"</option>)";
+				$("#courseList").append("<option value=" + val.courseNumber + ">" + val.courseNumber + "</option>)");
 			});
     }
     );

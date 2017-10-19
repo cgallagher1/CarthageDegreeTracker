@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sequel'
 require 'sinatra'
+require 'json'
 
 #enable sessions in the server (this is not on by default)
 enable :sessions
@@ -38,98 +39,98 @@ configure do
     def createMajor
 
         #creates a Major object and adds them to the list of majors
-        accounting = Major.create(:name => "Accounting")
-        artEducation = Major.create(:name => "ArtEducation")
-        artHistory = Major.create(:name => "ArtHistory")
-        art = Major.create(:name => "ArtStudio")
-        asianStudies = Major.create(:name => "AsianStudies")
-        athleticTraining = Major.create(:name => "AthleticTraining")
-        biology = Major.create(:name => "Biology")
-        chemistry = Major.create(:name => "Chemistry")
-        chinese = Major.create(:name => "Chinese")
-        classicalArchaeology = Major.create(:name => "ClassicalArchaeology")
-        classicalFoundations = Major.create(:name => "ClassicalFoundations")
-        communication = Major.create(:name => "Communication")
-        computerScience = Major.create(:name => "ComputerScience")
-        criminalJustice = Major.create(:name => "CriminalJustice")
-        economics = Major.create(:name => "Economics")
-        educationSpecial = Major.create(:name => "Education")
-        english = Major.create(:name => "English")
-        environmentalScience = Major.create(:name => "EnvironmentalScience")
-        finance = Major.create(:name => "Finance")
-        french = Major.create(:name => "French")
-        gIS = Major.create(:name => "GeographicInformationScience")
-        geoscience = Major.create(:name => "Geoscience")
-        german = Major.create(:name => "German")
-        graphicDesign = Major.create(:name => "GraphicDesign")
-        greatIdeas = Major.create(:name => "GreatIdeas")
-        history = Major.create(:name => "History")
-        iPE = Major.create(:name => "InternationalPoliticalEconomy")
-        japanese = Major.create(:name => "Japanese")
-        management = Major.create(:name => "Management")
-        marketing = Major.create(:name => "Marketing")
-        mathematics = Major.create(:name => "Mathematics")
-        music = Major.create(:name => "Music")
-        musicEducation = Major.create(:name => "MusicEducation")
-        neuroscience = Major.create(:name => "Neuroscience")
-        nursing = Major.create(:name => "Nursing")
-        philosophy = Major.create(:name => "Philosophy")
-        pE = Major.create(:name => "Physical Education")
-        physics = Major.create(:name => "Physics")
-        politicalScience = Major.create(:name => "PoliticalScience")
-        psychology = Major.create(:name => "Psychology")
-        publicRelations = Major.create(:name => "PublicRelations")
-        religion = Major.create(:name => "Religion")
-        socialWork = Major.create(:name => "SocialWork")
-        sociology = Major.create(:name => "Sociology")
-        spanish = Major.create(:name => "Spanish")
-        theatre = Major.create(:name => "Theatre")
-        theatrePerformance = Major.create(:name => "TheatrePerformance")
+        accounting = Major.create(:name => "accounting")
+        artEducation = Major.create(:name => "artEducation")
+        artHistory = Major.create(:name => "artHistory")
+        art = Major.create(:name => "artStudio")
+        asianStudies = Major.create(:name => "asianStudies")
+        athleticTraining = Major.create(:name => "athleticTraining")
+        biology = Major.create(:name => "biology")
+        chemistry = Major.create(:name => "chemistry")
+        chinese = Major.create(:name => "chinese")
+        classicalArchaeology = Major.create(:name => "classicalArchaeology")
+        classicalFoundations = Major.create(:name => "classicalFoundations")
+        communication = Major.create(:name => "communication")
+        computerScience = Major.create(:name => "computerScience")
+        criminalJustice = Major.create(:name => "criminalJustice")
+        economics = Major.create(:name => "economics")
+        educationSpecial = Major.create(:name => "education")
+        english = Major.create(:name => "english")
+        environmentalScience = Major.create(:name => "environmentalScience")
+        finance = Major.create(:name => "finance")
+        french = Major.create(:name => "french")
+        gIS = Major.create(:name => "gIS")
+        geoscience = Major.create(:name => "geoscience")
+        german = Major.create(:name => "german")
+        graphicDesign = Major.create(:name => "graphicDesign")
+        greatIdeas = Major.create(:name => "greatIdeas")
+        history = Major.create(:name => "history")
+        iPE = Major.create(:name => "iPE")
+        japanese = Major.create(:name => "japanese")
+        management = Major.create(:name => "management")
+        marketing = Major.create(:name => "marketing")
+        mathematics = Major.create(:name => "mathematics")
+        music = Major.create(:name => "music")
+        musicEducation = Major.create(:name => "musicEducation")
+        neuroscience = Major.create(:name => "neuroscience")
+        nursing = Major.create(:name => "nursing")
+        philosophy = Major.create(:name => "philosophy")
+        pe = Major.create(:name => "pe")
+        physics = Major.create(:name => "physics")
+        politicalScience = Major.create(:name => "politicalScience")
+        psychology = Major.create(:name => "psychology")
+        publicRelations = Major.create(:name => "publicRelations")
+        religion = Major.create(:name => "religion")
+        socialWork = Major.create(:name => "socialWork")
+        sociology = Major.create(:name => "sociology")
+        spanish = Major.create(:name => "spanish")
+        theatre = Major.create(:name => "theatre")
+        theatrePerformance = Major.create(:name => "theatrePerformance")
 
         #Computer Science Classes
         #csc 1110 Principles of Computer Science I (4 credits)
-        csc1110 = Course.create(:courseTitle => "Principles of Computer Science I ", :courseNumber => "csc 1110")
+        csc1110 = Course.create(:courseTitle => "Principles of Computer Science I ", :courseNumber => "csc1110")
         #csc 1120 Principles of Computer Science II (4 credits)
-        csc1120 = Course.create(:courseTitle => "Principles of Computer Science II ", :courseNumber => "csc 1120")
+        csc1120 = Course.create(:courseTitle => "Principles of Computer Science II ", :courseNumber => "csc1120")
         #csc 2510 Computer Organization (4 credits)
-        csc2510 = Course.create(:courseTitle => "Computer Organization", :courseNumber => "csc 2510")
+        csc2510 = Course.create(:courseTitle => "Computer Organization", :courseNumber => "csc2510")
         #csc 2560 Data Structures and Algorithms (4 credits)
-        csc2560 = Course.create(:courseTitle => "Data Structures and Algorithms", :courseNumber => "csc 2560")
+        csc2560 = Course.create(:courseTitle => "Data Structures and Algorithms", :courseNumber => "csc2560")
         #csc 3050 Object-Oriented Programming (4 credits)
-        csc3050 = Course.create(:courseTitle => "Object-Oriented Programming", :courseNumber => "csc 3050")
+        csc3050 = Course.create(:courseTitle => "Object-Oriented Programming", :courseNumber => "csc3050")
         #csc 3210 Computing Paradigms (4 credits)
-        csc3210 = Course.create(:courseTitle => "Computing Paradigms", :courseNumber => "csc 3210")
+        csc3210 = Course.create(:courseTitle => "Computing Paradigms", :courseNumber => "csc3210")
         #csc 3410 Database Design and Management (4 credits)
-        csc3410 = Course.create(:courseTitle => "Database Design and Management", :courseNumber => "csc 3410")
+        csc3410 = Course.create(:courseTitle => "Database Design and Management", :courseNumber => "csc3410")
         #csc 3450 Computer System Administration (4 credits)
-        csc3450 = Course.create(:courseTitle => "Computer System Administration", :courseNumber => "csc 3450")
+        csc3450 = Course.create(:courseTitle => "Computer System Administration", :courseNumber => "csc3450")
         #csc 3530 Artificial Intelligence and Cognitive Modeling (4 credits)
-        csc3530 = Course.create(:courseTitle => "Artificial Intelligence and Cognitive Modeling", :courseNumber => "csc 3530")
+        csc3530 = Course.create(:courseTitle => "Artificial Intelligence and Cognitive Modeling", :courseNumber => "csc3530")
         #csc 3600 Data Communications (4 credits)
-        csc3600 = Course.create(:courseTitle => "Data Communications", :courseNumber => "csc 3600")
+        csc3600 = Course.create(:courseTitle => "Data Communications", :courseNumber => "csc3600")
         #csc 3730 Operating Systems (4 credits)
-        csc3730 = Course.create(:courseTitle => "Operating Systems", :courseNumber => "csc 3730")
+        csc3730 = Course.create(:courseTitle => "Operating Systems", :courseNumber => "csc3730")
         #csc 3750 Algorithms (4 credits)
         csc3750 = Course.create(:courseTitle => "Algorithms", :courseNumber => "csc 3750")
         #csc 400T Topics in Computer Science (1-4 credits)
-        csc400T = Course.create(:courseTitle => "Topics in Computer Science", :courseNumber => "csc 400T")
+        csc400T = Course.create(:courseTitle => "Topics in Computer Science", :courseNumber => "csc400T")
         #csc 4350 Software Design and Development (4 credits)
-        csc4350 = Course.create(:courseTitle => "Software Design and Development", :courseNumber => "csc 4350")
+        csc4350 = Course.create(:courseTitle => "Software Design and Development", :courseNumber => "csc4350")
         #csc 4500 Independent Study (2-4 credits)
-        csc4500 = Course.create(:courseTitle => "Independent Study", :courseNumber => "csc 4500")
+        csc4500 = Course.create(:courseTitle => "Independent Study", :courseNumber => "csc4500")
         #csc 4650 Computer Architecture (4 credits)
-        csc4650 = Course.create(:courseTitle => "Computer Architecture", :courseNumber => "csc 4650")
+        csc4650 = Course.create(:courseTitle => "Computer Architecture", :courseNumber => "csc4650")
         #csc 4810 Foundations of Computer Science (4 credits)
-        csc4810 = Course.create(:courseTitle => "Foundations of Computer Science", :courseNumber => "csc 4810")
+        csc4810 = Course.create(:courseTitle => "Foundations of Computer Science", :courseNumber => "csc4810")
         #csc 4900 Research in Computer Science (1-4 credits)
-        csc4900 = Course.create(:courseTitle => "Research in Computer Science", :courseNumber => "csc 4900")
+        csc4900 = Course.create(:courseTitle => "Research in Computer Science", :courseNumber => "csc4900")
         #csc 4000 Senior Seminar (4 credits)
-        csc4000 = Course.create(:courseTitle => "Senior Seminar", :courseNumber => "csc 4000")
+        csc4000 = Course.create(:courseTitle => "Senior Seminar", :courseNumber => "csc4000")
         
         #Math Classes
             
         #MTH 1240 Discrete Structures (4 credits)
-        mth1240 = Course.create(:courseTitle => "Discrete Structures", :courseNumber => "mth 1240")
+        mth1240 = Course.create(:courseTitle => "Discrete Structures", :courseNumber => "mth1240")
 
         #Creation of Major with Classes
 
@@ -174,17 +175,16 @@ get '/' do
 	erb :graduationTracker
 end
 
-post '/majorReturn' do 
+post '/major' do 
 	#params holds the data from the post request
-    majorSelected = Major.where(:name => params[:nameMajor])
-    
-    puts majorSelected
+    #majorSelected = Major.where(:name => params[:name])
+    majorSelected = Major[name: params[:name]]
 
-    all_courses = majorSelected.courses.map do |chosenMajor|
-        course_info = {:courseTitle => all_courses.courseTitle, :courseNumber => all_courses.courseNumber}
+    all_courses = majorSelected.course.order.map do |chosenMajor|
+        course_info = {:courseTitle => chosenMajor.course.courseTitle, :courseNumber => chosenMajor.course.courseNumber}
     end
 
-    return json all_courses
+    return JSON all_courses
 
 end
 
