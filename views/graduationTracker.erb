@@ -43,6 +43,17 @@ function addClass()
     );
 }
 
+function calculate()
+{
+  $.post("/calc",
+  {userName: "user"},
+  function(data)
+  {
+    var json = JSON.parse(data);
+  }
+  );
+}
+
 </script>
 <style>
 body {background-color: LIGHTCORAL;}
@@ -92,6 +103,19 @@ ol   {color: white;}
 <div id="classList">
 
 </div>
+
+<p>
+</p>
+
+<button type="button" onclick="calculate()">Calculate</button>
+
+<p>
+</p>
+
+<div id="calcMajor">
+
+</div>
+
 
 </body>
 </html>

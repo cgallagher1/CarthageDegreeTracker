@@ -16,7 +16,8 @@ configure do
         #create a table of Major (if it doesn't already exist)
         DB.create_table? :majors do
         primary_key :id 
-        String :name 
+        String :name
+        int :numberOfElectives 
         end
 
         
@@ -24,7 +25,8 @@ configure do
         DB.create_table? :courses do
         primary_key :id 
         String :courseTitle
-        String :courseNumber 
+        String :courseNumber
+        boolean :required 
         end
 
         DB.create_table? :users do
@@ -63,7 +65,7 @@ configure do
         classicalArchaeology = Major.create(:name => "classicalArchaeology")
         classicalFoundations = Major.create(:name => "classicalFoundations")
         communication = Major.create(:name => "communication")
-        computerScience = Major.create(:name => "computerScience")
+        computerScience = Major.create(:name => "computerScience", :numberOfElectives => 6)
         criminalJustice = Major.create(:name => "criminalJustice")
         economics = Major.create(:name => "economics")
         educationSpecial = Major.create(:name => "education")
@@ -101,48 +103,48 @@ configure do
 
         #Computer Science Classes
         #csc 1110 Principles of Computer Science I (4 credits)
-        csc1110 = Course.create(:courseTitle => "Principles of Computer Science I ", :courseNumber => "csc1110")
+        csc1110 = Course.create(:courseTitle => "Principles of Computer Science I ", :courseNumber => "csc1110", :required => 1)
         #csc 1120 Principles of Computer Science II (4 credits)
-        csc1120 = Course.create(:courseTitle => "Principles of Computer Science II ", :courseNumber => "csc1120")
+        csc1120 = Course.create(:courseTitle => "Principles of Computer Science II ", :courseNumber => "csc1120", :required => 1)
         #csc 2510 Computer Organization (4 credits)
-        csc2510 = Course.create(:courseTitle => "Computer Organization", :courseNumber => "csc2510")
+        csc2510 = Course.create(:courseTitle => "Computer Organization", :courseNumber => "csc2510", :required => 1)
         #csc 2560 Data Structures and Algorithms (4 credits)
-        csc2560 = Course.create(:courseTitle => "Data Structures and Algorithms", :courseNumber => "csc2560")
+        csc2560 = Course.create(:courseTitle => "Data Structures and Algorithms", :courseNumber => "csc2560", :required => 1)
         #csc 3050 Object-Oriented Programming (4 credits)
-        csc3050 = Course.create(:courseTitle => "Object-Oriented Programming", :courseNumber => "csc3050")
+        csc3050 = Course.create(:courseTitle => "Object-Oriented Programming", :courseNumber => "csc3050", :required => 0)
         #csc 3210 Computing Paradigms (4 credits)
-        csc3210 = Course.create(:courseTitle => "Computing Paradigms", :courseNumber => "csc3210")
+        csc3210 = Course.create(:courseTitle => "Computing Paradigms", :courseNumber => "csc3210", :required => 0)
         #csc 3410 Database Design and Management (4 credits)
-        csc3410 = Course.create(:courseTitle => "Database Design and Management", :courseNumber => "csc3410")
+        csc3410 = Course.create(:courseTitle => "Database Design and Management", :courseNumber => "csc3410", :required => 0)
         #csc 3450 Computer System Administration (4 credits)
-        csc3450 = Course.create(:courseTitle => "Computer System Administration", :courseNumber => "csc3450")
+        csc3450 = Course.create(:courseTitle => "Computer System Administration", :courseNumber => "csc3450", :required => 0)
         #csc 3530 Artificial Intelligence and Cognitive Modeling (4 credits)
-        csc3530 = Course.create(:courseTitle => "Artificial Intelligence and Cognitive Modeling", :courseNumber => "csc3530")
+        csc3530 = Course.create(:courseTitle => "Artificial Intelligence and Cognitive Modeling", :courseNumber => "csc3530", :required => 0)
         #csc 3600 Data Communications (4 credits)
-        csc3600 = Course.create(:courseTitle => "Data Communications", :courseNumber => "csc3600")
+        csc3600 = Course.create(:courseTitle => "Data Communications", :courseNumber => "csc3600", :required => 0)
         #csc 3730 Operating Systems (4 credits)
-        csc3730 = Course.create(:courseTitle => "Operating Systems", :courseNumber => "csc3730")
+        csc3730 = Course.create(:courseTitle => "Operating Systems", :courseNumber => "csc3730", :required => 0)
         #csc 3750 Algorithms (4 credits)
-        csc3750 = Course.create(:courseTitle => "Algorithms", :courseNumber => "csc 3750")
+        csc3750 = Course.create(:courseTitle => "Algorithms", :courseNumber => "csc 3750", :required => 0)
         #csc 400T Topics in Computer Science (1-4 credits)
-        csc400T = Course.create(:courseTitle => "Topics in Computer Science", :courseNumber => "csc400T")
+        csc400T = Course.create(:courseTitle => "Topics in Computer Science", :courseNumber => "csc400T", :required => 0)
         #csc 4350 Software Design and Development (4 credits)
-        csc4350 = Course.create(:courseTitle => "Software Design and Development", :courseNumber => "csc4350")
+        csc4350 = Course.create(:courseTitle => "Software Design and Development", :courseNumber => "csc4350", :required => 0)
         #csc 4500 Independent Study (2-4 credits)
-        csc4500 = Course.create(:courseTitle => "Independent Study", :courseNumber => "csc4500")
+        csc4500 = Course.create(:courseTitle => "Independent Study", :courseNumber => "csc4500", :required => 0)
         #csc 4650 Computer Architecture (4 credits)
-        csc4650 = Course.create(:courseTitle => "Computer Architecture", :courseNumber => "csc4650")
+        csc4650 = Course.create(:courseTitle => "Computer Architecture", :courseNumber => "csc4650", :required => 0)
         #csc 4810 Foundations of Computer Science (4 credits)
-        csc4810 = Course.create(:courseTitle => "Foundations of Computer Science", :courseNumber => "csc4810")
+        csc4810 = Course.create(:courseTitle => "Foundations of Computer Science", :courseNumber => "csc4810", :required => 0)
         #csc 4900 Research in Computer Science (1-4 credits)
-        csc4900 = Course.create(:courseTitle => "Research in Computer Science", :courseNumber => "csc4900")
+        csc4900 = Course.create(:courseTitle => "Research in Computer Science", :courseNumber => "csc4900", :required => 0)
         #csc 4000 Senior Seminar (4 credits)
-        csc4000 = Course.create(:courseTitle => "Senior Seminar", :courseNumber => "csc4000")
+        csc4000 = Course.create(:courseTitle => "Senior Seminar", :courseNumber => "csc4000", :required => 1)
         
         #Math Classes
             
         #MTH 1240 Discrete Structures (4 credits)
-        mth1240 = Course.create(:courseTitle => "Discrete Structures", :courseNumber => "mth1240")
+        mth1240 = Course.create(:courseTitle => "Discrete Structures", :courseNumber => "mth1240", :required => 1)
 
         #Creation of Major with Classes
 
@@ -166,6 +168,7 @@ configure do
         computerScience.add_course(csc4810)
         computerScience.add_course(csc4900)
         computerScience.add_course(csc4000)
+        computerScience.add_course(mth1240)
 
         #Math Major Classes
         mathematics.add_course(mth1240)
@@ -220,5 +223,11 @@ post '/add' do
 
 end
 
+post '/calc' do
+    getUser = User[:userName => params[:userName]]
+
+    
+
+end
 
 
