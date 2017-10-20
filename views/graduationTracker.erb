@@ -29,7 +29,15 @@ function addClass()
 
 function createUser()
 {
-  var userName = document.getElementById(nameText).value;
+  var userName = document.getElementById("nameText").value;
+  $.post("/name",
+  {name: userName},
+  function(data)
+  {
+    console.log(userName);
+    document.getElementById("nameText").readOnly = true;
+  }
+  );
 }
 </script>
 <style>

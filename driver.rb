@@ -202,5 +202,8 @@ post '/add' do
     
 end
 
+post '/name' do
+    theUser = User.create(:name => params[:name])
+end
 
 
