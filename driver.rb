@@ -40,9 +40,15 @@ configure do
             DB.create_join_table(:course_id => :courses,:major_id => :majors)
         end
 
+        if not DB.table_exists?(:courses_users)
+            DB.create_join_table(:course_id => :courses, :user_id => :users)
+        end
+
     end
 
     def createMajor
+        #creates a User
+        theUser = User.create(:userName => "user")
 
         #creates a Major object and adds them to the list of majors
         accounting = Major.create(:name => "accounting")
@@ -199,11 +205,21 @@ post '/major' do
 end
 
 post '/add' do
+    getUser = User[:userName => "user"]
     
+    courseSelected = Course.where(:courseNumber => params[:courseNumber])
+
+    courseArray = Array.new
+
+    courseSelected.each do |course|
+        getUser.add_course(course)
+        course_info = {:courseTitle => course.courseTitle, :courseNumber => course.courseNumber}
+        courseArray = course_info
+    end
+
+    return JSON courseArray
+
 end
 
-post '/name' do
-    theUser = User.create(:name => params[:name])
-end
 
 

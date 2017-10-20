@@ -24,21 +24,23 @@ function returnMajor()
 
 function addClass()
 {
-
+    var courseSelected = document.getElementById("myCourse").value;
+    $.post("/add",
+    {courseNumber: courseSelected},
+    function(data)
+    {
+      console.log(data)
+      var json = JSON.parse(data);
+      $("#classList").append("<ol id= 'myCourses'>");
+      for(var i = 0; i < data.length; i++)
+      {
+        $("#myCourses").append("<li>" + json[i].courseNumber +  " " + json[i].courseTitle + "</li>");
+      }
+      $("#classList").append("</ol>");
+    }
+    );
 }
 
-function createUser()
-{
-  var userName = document.getElementById("nameText").value;
-  $.post("/name",
-  {name: userName},
-  function(data)
-  {
-    console.log(userName);
-    document.getElementById("nameText").readOnly = true;
-  }
-  );
-}
 </script>
 <style>
 body {background-color: LIGHTCORAL;}
@@ -49,16 +51,6 @@ p    {color: white;}
 <body>
 
 <h2>Carthage College Graduation Tracker</h2>
-
-<p>
-</p>
-
-<p>Please enter your name:</p>
-<input type="text" id="nameText">
-<button type="button" onclick="createUser()">Okay</button>
-
-<p>
-</p>
 
 <p>First add the classes you've taken</p>
 
@@ -89,7 +81,14 @@ p    {color: white;}
 <p>
 </p>
 
-<button type="button" onclick="addClass()">Add Class</button>
+<button type="button" onclick="addClass()">Add</button>
+
+<p>
+</p>
+
+<div id="classList">
+
+</div>
 
 </body>
 </html>
