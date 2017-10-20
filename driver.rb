@@ -209,15 +209,14 @@ post '/add' do
     
     courseSelected = Course.where(:courseNumber => params[:courseNumber])
 
-    courseArray = Array.new
+    course_info = Array.new
 
     courseSelected.each do |course|
         getUser.add_course(course)
-        course_info = {:courseTitle => course.courseTitle, :courseNumber => course.courseNumber}
-        courseArray = course_info
+        course_info = [{:courseTitle => course.courseTitle, :courseNumber => course.courseNumber}]
     end
 
-    return JSON courseArray
+    return JSON course_info
 
 end
 

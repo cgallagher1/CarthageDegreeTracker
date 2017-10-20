@@ -29,13 +29,15 @@ function addClass()
     {courseNumber: courseSelected},
     function(data)
     {
-      console.log(data)
       var json = JSON.parse(data);
+
       $("#classList").append("<ol id= 'myCourses'>");
+
       for(var i = 0; i < data.length; i++)
       {
-        $("#myCourses").append("<li>" + json[i].courseNumber +  " " + json[i].courseTitle + "</li>");
+        $("#myCourses").append("<li>" + json[i].courseTitle + "</li>");
       }
+
       $("#classList").append("</ol>");
     }
     );
@@ -46,6 +48,7 @@ function addClass()
 body {background-color: LIGHTCORAL;}
 h2   {color: black;}
 p    {color: white;}
+ol   {color: white;}
 </style>
 </head>
 <body>
