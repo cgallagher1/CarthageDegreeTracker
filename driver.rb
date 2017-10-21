@@ -224,9 +224,50 @@ post '/add' do
 end
 
 post '/calc' do
-    getUser = User[:userName => params[:userName]]
+    majorSelected = Major.where(:name => params[:name])
+    getUser = User[:userName => "user"]
+
+    tempMajorCourse = Array.new
+    needed_courses = Array.new
+    takenElectives = 0
+    electivesNeeded = 0
+
+    majorSelected.each do |major|
+        major.courses.each do |currentCourse|
+            tempMajorCourse.push(currentCourse)
+        end
+    end
 
     
+    getUser.each do |user|
+        tempMajorCourse.each do |i|
+            user.course.each do |j|
+                if user.course[j].courseNumber == tempMajorCourse[i].courseNumber && tempMajorCourse[i].required == 0
+                    takenElectives = takenElectives + 1
+                end
+                if user.course[j].courseNumber == tempMajorCourse[i].courseNumber
+                    takenElectives.delete_at(i)
+                end
+            end
+        end
+    end
+    
+    tempMajorCourse.each do |i|
+        if tempMajorCourse[i].required == 1
+            needed_courses.push([{:courseTitle => i.courseTitle, :courseNumber => i.courseNumber}])
+        end
+    end
+
+   majorSelected.each do |major|
+        electivesNeeded = major.numberOfElectives - takenElectives
+        if electivesNeeded < 0
+            electivesNeeded = 0
+        end  
+        for i in electivesNeeded do
+            needed_courses.push([{:courseTitle => tempMajorCourse[i].courseTitle, :courseNumber => tempMajorCourse[i].courseNumber}])
+        end
+   end
+
 
 end
 

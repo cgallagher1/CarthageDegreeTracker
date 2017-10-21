@@ -45,8 +45,9 @@ function addClass()
 
 function calculate()
 {
+  var majorSelected = document.getElementById("selectedMajor").value;
   $.post("/calc",
-  {userName: "user"},
+  {name: majorSelected},
   function(data)
   {
     var json = JSON.parse(data);
@@ -102,6 +103,18 @@ ol   {color: white;}
 
 <div id="classList">
 
+</div>
+
+<p>
+</p>
+
+<p>Please Select Major You Are Trying To Finish</p>
+<div id="secondMajorList">
+  <select id="selectedMajor">
+	  <% @all_majors.each do |names| %>	
+      <option value= <%= names.name %>><%= names.name %> </option>
+    <% end %>
+  </select>			
 </div>
 
 <p>
