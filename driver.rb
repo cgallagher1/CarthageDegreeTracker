@@ -268,7 +268,7 @@ post '/calc' do
         end
    end
 
-
+   return JSON needed_courses
 end
 
 

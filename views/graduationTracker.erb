@@ -51,6 +51,15 @@ function calculate()
   function(data)
   {
     var json = JSON.parse(data);
+
+    $("#calcMajor").append("<p>Classes still needed to be taken</p>");
+    $("#calcMajor").append("<ol id= 'neededClasses'>");
+    for(var i = 0; i < data.length; i++)
+    {
+      $("#neededClasses").append("<li>" + json[i].courseTitle + "</li>");
+    }
+
+    $("#calcMajor").append("</ol>");
   }
   );
 }
