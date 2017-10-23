@@ -3,6 +3,9 @@
 <head>
 <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
+
+//This function gets the major specified from the drop down list and sends it
+//to the server. When the server respondes, it will show a list of possible classes in a major.
 function returnMajor() 
 {
     var majorSelected = document.getElementById("myMajor").value;
@@ -11,6 +14,7 @@ function returnMajor()
     {name: majorSelected}, //data 
     function(data) //function to call on return
     { 
+      //Parses the data and creates the drop down list with the returned courses as course numbers
       var json = JSON.parse(data);
       $("#coursesInto").append("<select id='myCourse'>")
       for(var i = 0; i < data.length;i++)
@@ -21,7 +25,8 @@ function returnMajor()
     }
     );
 }
-
+//This function gets the class chosen from the drop down list and sends it to the server.
+//When the server returns, the function will display the users chosen classes in a list
 function addClass()
 {
     var courseSelected = document.getElementById("myCourse").value;
@@ -42,7 +47,8 @@ function addClass()
     }
     );
 }
-
+//This function will get the Major specified that the user wants to complete and send it to the server
+//When the server returns the function will print the classes the user still needs to take in a list
 function calculate()
 {
   var majorSelected = document.getElementById("selectedMajor").value;
@@ -73,7 +79,7 @@ ol   {color: white;}
 </style>
 </head>
 <body>
-
+<!-- Start of Page -->
 <h2>Carthage College Graduation Tracker</h2>
 
 <p>First add the classes you've taken</p>
@@ -83,6 +89,7 @@ ol   {color: white;}
 
 <p> Please Select the Department: </p>
 
+<!-- List of all the majors -->
 <div id="majorList">
   <select id="myMajor">
 	  <% @all_majors.each do |names| %>	
@@ -94,22 +101,24 @@ ol   {color: white;}
 <p>
 </p>
 
+<!-- Button that will execute when the user has chosen the Major they want to add a class from -->
 <button type="button" onclick="returnMajor()">Continue</button>
 
  <p> Please Select the Course You've Taken </p>
 
+<!-- This will display the courses in a major -->
 <div id="coursesInto">
 
 </div>
 
 <p>
 </p>
-
+<!-- This button will execute when a user has chosen a class they have taken  -->
 <button type="button" onclick="addClass()">Add</button>
 
 <p>
 </p>
-
+<!-- This will display the classes the user has taken -->
 <div id="classList">
 
 </div>
@@ -118,6 +127,7 @@ ol   {color: white;}
 </p>
 
 <p>Please Select Major You Are Trying To Finish</p>
+<!-- This is will display the list of possible majors -->
 <div id="secondMajorList">
   <select id="selectedMajor">
 	  <% @all_majors.each do |names| %>	
@@ -128,12 +138,12 @@ ol   {color: white;}
 
 <p>
 </p>
-
+<!-- This will execute when the user has chosen the major the want to finish -->
 <button type="button" onclick="calculate()">Calculate</button>
 
 <p>
 </p>
-
+<!-- This will show the classes the user still has to take for a specific major -->
 <div id="calcMajor">
 
 </div>

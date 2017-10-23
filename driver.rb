@@ -199,29 +199,39 @@ get '/' do
 	erb :graduationTracker
 end
 
+#called when the user hits the okay button on what major they want to add a class from
 post '/major' do 
 	#params holds the data from the post request
     majorSelected = Major.where(:name => params[:name])
     
+    #Array that will hold all the courses
     all_courses = Array.new
 
+    #loop though the major selected courses and add them in a JSON form with Title and Number
     majorSelected.each do |major|
         all_courses = major.courses.each.map do |currentCourse|
             course_info = {:courseTitle => currentCourse.courseTitle, :courseNumber => currentCourse.courseNumber}
         end
     end
 
+    #return the JSON object
     return JSON all_courses
 
 end
 
+#Called when the user hits the add button to add a course to their list
 post '/add' do
+    #Gets the user
     getUser = User[:userName => "user"]
     
+    #Finds the course selected
     courseSelected = Course.where(:courseNumber => params[:courseNumber])
 
+    #Array that will be returned that holds the course info
     course_info = Array.new
 
+    #Loop that adds the course selcted to the user's list and returns the course
+    #back so the user can see that the course has been added
     courseSelected.each do |course|
         getUser.add_course(course)
         course_info = [{:courseTitle => course.courseTitle, :courseNumber => course.courseNumber}]
@@ -231,31 +241,46 @@ post '/add' do
 
 end
 
+#Called when the user is done adding classes and wants to Calculate how much of a major they have left
 post '/calc' do
+    #Gets the major and user selected
     majorSelected = Major.where(:name => params[:name])
     getUser = User[:userName => "user"]
 
+    #Array that will hold the major classes
     tempMajorCourse = Array.new
+    #Array that will hold the user's classes
     userCourse = Array.new
+    #Array that will return the classes the user still needs to take
     needed_courses = Array.new
+    #Counter that will keep track of how many electives the User has taken
     takenElectives = 0
+    #Counter that will hold how many electives the user still needs to take for a specific major
     electivesNeeded = 0
 
+    #Loops through the Major's classes and adds them to the tempMajorCourse list
     majorSelected.each do |major|
         major.courses.each do |currentCourse|
             tempMajorCourse.push(currentCourse)
         end
     end
     
+    #Loops through the user's courses and adds them to userCourses
     getUser.courses.each do |course|
         userCourse.push(course)
     end
 
+    #Loop to find how many electives the user has take
    for i in 0...userCourse.size()
        for j in 0...tempMajorCourse.size()
+            #Gets a major course
             majorCourse = tempMajorCourse[j].courseTitle
+            #Gets a User course to check against
             currentCourse = getUser.courses.at(i).courseTitle
+            #Determinds whether or not a course is an elective
             isRequired = tempMajorCourse[j].required
+            #If the user course and user course match up and it is an elective
+            #takenElective will increase in size
             if(majorCourse == currentCourse)
                 if(isRequired == false)
                     takenElectives = takenElectives + 1
@@ -264,6 +289,7 @@ post '/calc' do
         end
     end   
 
+    #Gets the major and sees how many electives the major requires
     majorSelected.each do |major|
         electivesNeeded = major.numberOfElectives - takenElectives
         if electivesNeeded < 0
@@ -271,23 +297,34 @@ post '/calc' do
         end  
    end
 
+   #Loop that returns the classes the user still has to take
     for i in 0...tempMajorCourse.size()
+        #Bool to see whether or not the course has already been added
         haveClass = false
         for j in 0...userCourse.size()
+            #Sees whether or not the selected course is an elective
             isRequired = tempMajorCourse[i].required
+            #Gets the course title
             majorCourse = tempMajorCourse[i].courseTitle
+            #Gets the courseNumber
             majorNumber = tempMajorCourse[i].courseNumber
+            #Gets the course being checked
             currentCourse = getUser.courses.at(j).courseTitle
+            #If they have the class skip over 
             if(majorCourse == currentCourse)
                 haveClass = true
                 "skipped"
                 break
             end
         end
+        #If they dont have the specified class
         if(haveClass == false)
+            #Checks to see if it is required and adds it the needed_course list if so
             if(tempMajorCourse[i].required == true)
                 needed_courses.push({:courseTitle => tempMajorCourse[i].courseTitle, :courseNumber => tempMajorCourse[i].courseNumber})
                 puts tempMajorCourse[i].courseTitle
+            #Checks how many electives the user still needs and continues to add electives until
+            #the electives requirement has been met
             elsif(electivesNeeded > 0)
                 needed_courses.push({:courseTitle => tempMajorCourse[i].courseTitle, :courseNumber => tempMajorCourse[i].courseNumber})
                 puts tempMajorCourse[i].courseTitle
@@ -296,7 +333,7 @@ post '/calc' do
             end
         end
     end
-
+    #Returns the list of needed classes
    return JSON needed_courses
 end
 
