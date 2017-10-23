@@ -14,6 +14,7 @@ configure do
     def create_tables
         
         #create a table of Major (if it doesn't already exist)
+        #Each major has a name and a specifc amount of electives needed
         DB.create_table? :majors do
         primary_key :id 
         String :name
@@ -21,7 +22,8 @@ configure do
         end
 
         
-        #create a Courses table (with a foreign key to the major)
+        #create a Courses table (if it doesn't already exist)
+        #Every course has a title, number, and a boolean value of whether or not it is a required course
         DB.create_table? :courses do
         primary_key :id 
         String :courseTitle
@@ -29,6 +31,8 @@ configure do
         boolean :required 
         end
 
+        #create a table of Users (if it doesn't already exist)
+        #Every user has a name
         DB.create_table? :users do
         primary_key :id 
         String :userName
@@ -37,12 +41,14 @@ configure do
         #join tables are always named with the names of the two joining tables
         #in alphabetic order
         if not DB.table_exists?(:courses_majors)
-            #create a join table for the many to many relationship between
+            #Create a join table for the many to many relationship between
             #Courses and Majors. This will create courses_majors
             DB.create_join_table(:course_id => :courses,:major_id => :majors)
         end
 
         if not DB.table_exists?(:courses_users)
+            #Create a join table for the many to many relationship between
+            #Courses and Users. This will create courses_majors
             DB.create_join_table(:course_id => :courses, :user_id => :users)
         end
 
@@ -177,6 +183,7 @@ configure do
  
 end
 
+#Creates the Majors, Classes, and Users
 create_tables
 require_relative 'Courses.rb'
 require_relative 'Majors.rb'
@@ -185,6 +192,7 @@ createMajor
 
 #handles the inital page loads
 get '/' do
+    #Returns all the majors
     @all_majors = Major.order(:name)
     
 	#render the template in the views folder guestbook.erb
@@ -243,44 +251,51 @@ post '/calc' do
         userCourse.push(course)
     end
 
-    for i in 0...tempMajorCourse.size()
-        for j in 0...userCourse.size()
-            majorCourse = tempMajorCourse[i].courseTitle
-            courseChecking = userCourse[j].courseTitle
-            isRequired = tempMajorCourse[i].required
-            if(majorCourse == courseChecking)
+   for i in 0...userCourse.size()
+       for j in 0...tempMajorCourse.size()
+            majorCourse = tempMajorCourse[j].courseTitle
+            currentCourse = getUser.courses.at(i).courseTitle
+            isRequired = tempMajorCourse[j].required
+            if(majorCourse == currentCourse)
                 if(isRequired == false)
                     takenElectives = takenElectives + 1
-                    puts takenElectives
                 end
-                tempMajorCourse.delete_at(i)
-                puts tempMajorCourse.size()
             end
         end
-    end    
+    end   
 
-    for i in 0...tempMajorCourse.size()
-        isRequired = tempMajorCourse[i].required
-        puts isRequired
-        majorCourse = tempMajorCourse[i].courseTitle
-        puts majorCourse
-        majorNumber = tempMajorCourse[i].courseNumber
-        puts majorNumber
-        if(isRequired == true)
-            needed_courses.push([{:courseTitle => majorCourse, :courseNumber => tempMajorCourse[i].courseNumber}])
-            "increased"
-        end
-    end
-
-   majorSelected.each do |major|
+    majorSelected.each do |major|
         electivesNeeded = major.numberOfElectives - takenElectives
         if electivesNeeded < 0
             electivesNeeded = 0
         end  
-        for i in electivesNeeded do
-            needed_courses.push([{:courseTitle => tempMajorCourse[i].courseTitle, :courseNumber => tempMajorCourse[i].courseNumber}])
-        end
    end
+
+    for i in 0...tempMajorCourse.size()
+        haveClass = false
+        for j in 0...userCourse.size()
+            isRequired = tempMajorCourse[i].required
+            majorCourse = tempMajorCourse[i].courseTitle
+            majorNumber = tempMajorCourse[i].courseNumber
+            currentCourse = getUser.courses.at(j).courseTitle
+            if(majorCourse == currentCourse)
+                haveClass = true
+                "skipped"
+                break
+            end
+        end
+        if(haveClass == false)
+            if(tempMajorCourse[i].required == true)
+                needed_courses.push({:courseTitle => tempMajorCourse[i].courseTitle, :courseNumber => tempMajorCourse[i].courseNumber})
+                puts tempMajorCourse[i].courseTitle
+            elsif(electivesNeeded > 0)
+                needed_courses.push({:courseTitle => tempMajorCourse[i].courseTitle, :courseNumber => tempMajorCourse[i].courseNumber})
+                puts tempMajorCourse[i].courseTitle
+                electivesNeeded = electivesNeeded - 1
+                puts electivesNeeded
+            end
+        end
+    end
 
    return JSON needed_courses
 end
