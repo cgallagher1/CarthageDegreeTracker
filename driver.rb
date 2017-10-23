@@ -247,13 +247,28 @@ post '/calc' do
         for j in 0...userCourse.size()
             majorCourse = tempMajorCourse[i].courseTitle
             courseChecking = userCourse[j].courseTitle
-            puts i.to_s
+            isRequired = tempMajorCourse[i].required
+            if(majorCourse == courseChecking)
+                if(isRequired == false)
+                    takenElectives = takenElectives + 1
+                    puts takenElectives
+                end
+                tempMajorCourse.delete_at(i)
+                puts tempMajorCourse.size()
+            end
         end
     end    
-    
+
     for i in 0...tempMajorCourse.size()
-        if tempMajorCourse[i].required == 1
-            needed_courses.push([{:courseTitle => i.courseTitle, :courseNumber => i.courseNumber}])
+        isRequired = tempMajorCourse[i].required
+        puts isRequired
+        majorCourse = tempMajorCourse[i].courseTitle
+        puts majorCourse
+        majorNumber = tempMajorCourse[i].courseNumber
+        puts majorNumber
+        if(isRequired == true)
+            needed_courses.push([{:courseTitle => majorCourse, :courseNumber => tempMajorCourse[i].courseNumber}])
+            "increased"
         end
     end
 
