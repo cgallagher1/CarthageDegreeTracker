@@ -228,6 +228,7 @@ post '/calc' do
     getUser = User[:userName => "user"]
 
     tempMajorCourse = Array.new
+    userCourse = Array.new
     needed_courses = Array.new
     takenElectives = 0
     electivesNeeded = 0
@@ -237,22 +238,20 @@ post '/calc' do
             tempMajorCourse.push(currentCourse)
         end
     end
-
     
-    getUser.each do |user|
-        tempMajorCourse.each do |i|
-            user.course.each do |j|
-                if user.course[j].courseNumber == tempMajorCourse[i].courseNumber && tempMajorCourse[i].required == 0
-                    takenElectives = takenElectives + 1
-                end
-                if user.course[j].courseNumber == tempMajorCourse[i].courseNumber
-                    takenElectives.delete_at(i)
-                end
-            end
-        end
+    getUser.courses.each do |course|
+        userCourse.push(course)
     end
+
+    for i in 0...tempMajorCourse.size()
+        for j in 0...userCourse.size()
+            majorCourse = tempMajorCourse[i].courseTitle
+            courseChecking = userCourse[j].courseTitle
+            puts i.to_s
+        end
+    end    
     
-    tempMajorCourse.each do |i|
+    for i in 0...tempMajorCourse.size()
         if tempMajorCourse[i].required == 1
             needed_courses.push([{:courseTitle => i.courseTitle, :courseNumber => i.courseNumber}])
         end
