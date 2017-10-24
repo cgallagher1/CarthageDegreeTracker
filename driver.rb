@@ -82,7 +82,7 @@ configure do
         gIS = Major.create(:name => "gIS")
         geoscience = Major.create(:name => "geoscience")
         german = Major.create(:name => "german")
-        graphicDesign = Major.create(:name => "graphicDesign")
+        graphicDesign = Major.create(:name => "graphicDesign", :numberOfElectives => 7)
         greatIdeas = Major.create(:name => "greatIdeas")
         history = Major.create(:name => "history")
         iPE = Major.create(:name => "iPE")
@@ -106,6 +106,11 @@ configure do
         spanish = Major.create(:name => "spanish")
         theatre = Major.create(:name => "theatre")
         theatrePerformance = Major.create(:name => "theatrePerformance")
+
+        #Art Classes
+        #ART 1070 Introduction to Two-Dimensional Design (4 credits)
+        art1070 = Course.create(:courseTitle => "Introduction to Two-Dimensional Design", :courseNumber => "1070", :required => 1)
+
 
         #Computer Science Classes
         #csc 1110 Principles of Computer Science I (4 credits)
@@ -147,6 +152,32 @@ configure do
         #csc 4000 Senior Seminar (4 credits)
         csc4000 = Course.create(:courseTitle => "Senior Seminar", :courseNumber => "csc4000", :required => 1)
         
+        #Graphic Design Classes
+        #CDM 1000 Communication Survey (4 credits)
+        cdm1000 = Course.create(:courseTitle => "Communication Survey", :courseNumber => "1000", :required => 1)
+        #CDM 1150 Human Communication (4 credits)
+        cdm1150 = Course.create(:courseTitle => "Human Communication", :courseNumber => "1150", :required => 1)
+        #CDM 1200 Public Speaking (4 credits)
+        cdm1200 = Course.create(:courseTitle => "Public Speaking", :courseNumber => "1200", :required => 1)
+        #CDM 1300 Visual Communication (4 credits)
+        cdm1300 = Course.create(:courseTitle => "Visual Communication", :courseNumber => "1300", :required => 1)
+        #CDM 2000 Graphic Design I (4 credits)
+        cdm2000 = Course.create(:courseTitle => "Graphic Design I", :courseNumber => "2000", :required => 0)
+        #CDM 2850 Typography (4 credits)
+        cdm2850 = Course.create(:courseTitle => "Typography", :courseNumber => "2850", :required => 0)
+        #CDM 3250 Graphic Design Practicum (4 credits)
+        cdm3250 = Course.create(:courseTitle => "Graphic Design Practicum", :courseNumber => "3250", :required => 0)
+        #CDM 3530 Web Design I (4 credits)
+        cdm3530 = Course.create(:courseTitle => "Web Design I", :courseNumber => "3530", :required => 0)
+        #CDM 3555 Graphic Design Skills Assessment* (0 credits)
+        cdm3555 = Course.create(:courseTitle => "Graphic Design Skills Assessment", :courseNumber => "3555", :required => 1)
+        #CDM 3750 Graphic Design II (4 credits)
+        cdm3750 = Course.create(:courseTitle => "Graphic Design II", :courseNumber => "3750", :required => 0)
+        #CDM 4020 Graphic Design Senior Seminar (4 credits)
+        cdm4020 = Course.create(:courseTitle => "Graphic Design Senior Seminar", :courseNumber => "4020", :required => 0)
+
+
+
         #Math Classes
             
         #MTH 1240 Discrete Structures (4 credits)
