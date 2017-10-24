@@ -89,7 +89,7 @@ configure do
         japanese = Major.create(:name => "japanese")
         management = Major.create(:name => "management")
         marketing = Major.create(:name => "marketing")
-        mathematics = Major.create(:name => "mathematics")
+        mathematics = Major.create(:name => "mathematics", :numberOfElectives => 3)
         music = Major.create(:name => "music")
         musicEducation = Major.create(:name => "musicEducation")
         neuroscience = Major.create(:name => "neuroscience")
@@ -110,6 +110,8 @@ configure do
         #Art Classes
         #ART 1070 Introduction to Two-Dimensional Design (4 credits)
         art1070 = Course.create(:courseTitle => "Introduction to Two-Dimensional Design", :courseNumber => "1070", :required => 1)
+        #ART 3010 Illustration (4 credits)
+        art3010 = Course.create(:courseTitle => "Illustration", :courseNumber => "3010", :required => 1)
 
 
         #Computer Science Classes
@@ -175,13 +177,52 @@ configure do
         cdm3750 = Course.create(:courseTitle => "Graphic Design II", :courseNumber => "3750", :required => 0)
         #CDM 4020 Graphic Design Senior Seminar (4 credits)
         cdm4020 = Course.create(:courseTitle => "Graphic Design Senior Seminar", :courseNumber => "4020", :required => 0)
+        #CDM 2500 Basic Digital Photography (4 credits)
+        cdm2500 = Course.create(:courseTitle => "Basic Digital Photography", :courseNumber => "2500", :required => 0)
+        #CDM 3150 History of Graphic Design (4 credits)
+        cdm3150 = Course.create(:courseTitle => "History of Graphic Design", :courseNumber => "3150", :required => 0)
+        #CDM 3400 Communication and Technology (4 credits)
+        cdm3400 = Course.create(:courseTitle => "Communication and Technology", :courseNumber => "3400", :required => 0)
+        #CDM 3540 Web Design II (4 credits)
+        cdm3540 = Course.create(:courseTitle => "Web Design II", :courseNumber => "3540", :required => 0)
+        #CDM 3560 Graphic Design Internship (4 credits)
+        cdm3560 = Course.create(:courseTitle => "Graphic Design Internship", :courseNumber => "3560", :required => 0)
 
 
 
         #Math Classes
-            
+        #MTH 1120 Calculus I (4 cr.)
+        mth1120 = Course.create(:courseTitle => "Calculus I", :courseNumber => "mth1120", :required => 1)
+        #MTH 1220 Calculus II (4 cr.)
+        mth1220 = Course.create(:courseTitle => "Calculus II", :courseNumber => "mth1220", :required => 1)
         #MTH 1240 Discrete Structures (4 credits)
         mth1240 = Course.create(:courseTitle => "Discrete Structures", :courseNumber => "mth1240", :required => 1)
+        #MTH 2040 Linear Algebra (4 cr.)
+        mth2040 = Course.create(:courseTitle => "Linear Algebra", :courseNumber => "mth2040", :required => 1)
+        #MTH 3040 Abstract Algebra (4 cr.)
+        mth3040 = Course.create(:courseTitle => "Abstract Algebra", :courseNumber => "mth3040", :required => 1)
+        #MTH 3120 Real Analysis (4 cr.)
+        mth3120 = Course.create(:courseTitle => "Real Analysis", :courseNumber => "mth3120", :required => 1)
+        #MTH 4300 Senior Research (4 cr.)
+        mth4300 = Course.create(:courseTitle => "Senior Research", :courseNumber => "mth4300", :required => 1)
+        #MTH 4990 Senior Thesis Completion (0 cr.)
+        mth4990 = Course.create(:courseTitle => "Senior Thesis Completion", :courseNumber => "mth4990", :required => 1)
+        #MTH 2080 Modern Geometry (4 cr.)
+        mth2080 = Course.create(:courseTitle => "Modern Geometry", :courseNumber => "mth2080", :required => 0)
+        #MTH 3050 Theory of Statistics (4 cr.)
+        mth3050 = Course.create(:courseTitle => "Theory of Statistics", :courseNumber => "mth3050", :required => 0)
+        #MTH 2020 Differential Equations (4 cr.)
+        mth2020 = Course.create(:courseTitle => "Differential Equations", :courseNumber => "mth2020", :required => 0)
+        #MTH 2120 Multivariate Calculus (4 cr.)
+        mth2120 = Course.create(:courseTitle => "Multivariate Calculus", :courseNumber => "mth2120", :required => 0)
+        #MTH 3220 Complex Variables (4 cr.)
+        mth3220 = Course.create(:courseTitle => "Complex Variables", :courseNumber => "mth3220", :required => 0)
+        #MTH 3180 Introduction to Topology (4 cr.)
+        mth3180 = Course.create(:courseTitle => "Introduction to Topologys", :courseNumber => "mth3180", :required => 0)
+        #MTH 3140 Abstract Algebra II (4 cr.)
+        mth3140 = Course.create(:courseTitle => "Abstract Algebra II", :courseNumber => "mth3140", :required => 0)
+        #MTH 3030 Discrete Structures II (4 cr.)
+        mth3030 = Course.create(:courseTitle => "Discrete Structures II", :courseNumber => "mth3030", :required => 0)
 
         #Creation of Major with Classes
 
@@ -207,8 +248,41 @@ configure do
         computerScience.add_course(csc4000)
         computerScience.add_course(mth1240)
 
+        #Graphic Design Major Classes
+        graphicDesign.add_course(cdm1000)
+        graphicDesign.add_course(cdm1150)
+        graphicDesign.add_course(cdm1200)
+        graphicDesign.add_course(cdm1300)
+        graphicDesign.add_course(cdm2000)
+        graphicDesign.add_course(cdm2500)
+        graphicDesign.add_course(cdm2850)
+        graphicDesign.add_course(cdm3150)
+        graphicDesign.add_course(cdm3250)
+        graphicDesign.add_course(cdm3400)
+        graphicDesign.add_course(cdm3530)
+        graphicDesign.add_course(cdm3540)
+        graphicDesign.add_course(cdm3555)
+        graphicDesign.add_course(cdm3560)
+        graphicDesign.add_course(cdm3750)
+        graphicDesign.add_course(cdm4020)
+
         #Math Major Classes
+        mathematics.add_course(mth1120)
+        mathematics.add_course(mth1220)
         mathematics.add_course(mth1240)
+        mathematics.add_course(mth2020)
+        mathematics.add_course(mth2040)
+        mathematics.add_course(mth2080)
+        mathematics.add_course(mth2120)
+        mathematics.add_course(mth3030)
+        mathematics.add_course(mth3040)
+        mathematics.add_course(mth3050)
+        mathematics.add_course(mth3120)
+        mathematics.add_course(mth3140)
+        mathematics.add_course(mth3180)
+        mathematics.add_course(mth3220)
+        mathematics.add_course(mth4300)
+        mathematics.add_course(mth4990)
         
     end
  
