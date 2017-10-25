@@ -427,14 +427,11 @@ post '/calc' do
             #Checks to see if it is required and adds it the needed_course list if so
             if(tempMajorCourse[i].required == true)
                 needed_courses.push({:courseTitle => tempMajorCourse[i].courseTitle, :courseNumber => tempMajorCourse[i].courseNumber})
-                puts tempMajorCourse[i].courseTitle
             #Checks how many electives the user still needs and continues to add electives until
             #the electives requirement has been met
             elsif(electivesNeeded > 0)
                 needed_courses.push({:courseTitle => tempMajorCourse[i].courseTitle, :courseNumber => tempMajorCourse[i].courseNumber})
-                puts tempMajorCourse[i].courseTitle
                 electivesNeeded = electivesNeeded - 1
-                puts electivesNeeded
             end
         end
     end
